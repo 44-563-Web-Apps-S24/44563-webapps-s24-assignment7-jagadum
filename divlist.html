@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html> <head><title>Nuthan Jarugumalli builds list with divs</title> <style>
+    .flex-container {
+      display: flex;  flex-direction:row;
+      background-color: red;
+  }
+
+.flex-container > div {  /*div children of the flex container*/
+  background-color: #f1f1f1; 
+  margin: 10px;  padding: 20px;  font-size: 30px;
+}
+
+/* Responsive layout */
+@media (max-width: 600px) { 
+	 .flex-container{
+		 flex-direction:column;
+		 background-color: green;
+	  }
+	}
+</style></head>
+
+
+
+<body>
+	<h1>Nuthan Jarugumalli builds list with divs</h1>
+	<input type="text" id="inputvalue">
+		<div class="flex-container divlist" id="target">
+		</div>
+	
+	<p> Press the button to create an new element of type div and then add it to the container.</p>
+		<button onclick="makeNewDiv()">Add end</button>
+		<button onclick="remove()">Remove</button>
+ 		<button onclick="addFront()">Add Front</button>
+		<button onclick="swap()">Swap</button>
+	
+	
+</body>
+<script>
+	var value_input = document.getElementById("inputvalue").value;
+	var value_output = document.getElementById("inputs")
+	value_output.innerHTML = value_input;
+	value_output.className ="divlist";
+	function makeNewDiv(){
+		/* make the div and its text */
+		let value_input = document.getElementById("inputvalue").value;
+		let element = document.createElement("div")
+		element.className ="divlist";
+		
+		element.innerHTML = value_input
+		element.style.color = "orange"
+		
+
+		/* add it to the container */
+		let container = document.getElementById('target')
+		container.appendChild(element)
+		
+	}
+	function remove() {
+      var thelist = document.getElementsByClassName("divlist");
+      var lengths = thelist.length;
+      if (lengths > 0) {
+        var i = Math.floor(lengths / 2);
+        thelist[i].remove();
+      }
+    }
+	function addFront(){
+		let value_input = document.getElementById("inputvalue").value;
+		var newItem = document.createElement('div');
+		newItem.innerHTML =value_input;
+		let container = document.getElementById('target');
+		container.insertBefore(newItem,container.firstChild);
+	}
+	function swap(){
+		let divlist = Array.from(document.getElementsByClassName("divlist"));
+		let index1 = Math.floor(Math.random() * divlist.length);
+		let index2 = Math.floor(Math.random() * divlist.length);
+		if(index1 == index2){
+			index2 = Math.floor(Math.random() * divlist.length);
+		}
+		let ele1 = divlist[index1];
+		let ele2 = divlist[index2];
+		if (index1 > index2){
+			var slicelist = divlist.slice(index2, index1);
+		}
+		else{
+			slicelist = divlist.slice(index1, index2);
+		}
+		ele1.parentNode.insertBefore(ele1, ele2);
+		divlist[divlist.length - 1].appendChild(slicelist);
+		let container = document.getElementById('target');
+		container.innerHTML = divlist;
+}
+
+	
+</script>
+</html>	
