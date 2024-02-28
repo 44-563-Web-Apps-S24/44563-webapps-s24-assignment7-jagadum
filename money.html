@@ -2,23 +2,20 @@
 <html>
     <head><title>Find the coins</title>
     <style>
-        h1{justify-content: center; display: flex; background-color: rgba(23, 7, 248, 0.326);}
-        p{display: flex;justify-content: center;}
         p:hover{color: white; background-color: black;}
         .location {display: table;}
         .containers{display: table-row;}
         .location {
             display: table-cell;
             padding: 5px;
-            border: 1px solid black;
-        }
+            border: 1px solid black;}
     </style></head>
     <body>
         <h1>Find the coins by Nuthan Jarugumalli</h1>
         <p>Click on the locations to find coins, beware the monster</p>
         <p id="locations">Number of locations checked is zero.</p>
         <p id="score">Score is zero.</p>
-        <p onclick="help()">Click for help.</p>
+        <button onclick="help()">Click for help.</button>
         <p id="help">Help report</p>
         <div class="containers container-fluid">
         <div class="containers d-flex flex-row">
