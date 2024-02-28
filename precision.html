@@ -25,19 +25,20 @@
 
         document.getElementById('stopBtn').onclick = recordTime;
         function startTime() {
-            for (let i = 0; i < 5; i++) {
+            let countdownStart = Math.floor(Math.random() * 9) + 2; // Randomly choose countdown start between 2 and 10
+            for (let i = countdownStart; i >= 0; i--) {
                 setTimeout(function() {
                     document.getElementById('counter').innerHTML = i;
-                }, (4 - i) * 1000);
+                }, (countdownStart - i) * 1000);
             }
             setTimeout(function() {
                 if (stopTime === undefined) {
                     document.getElementById('target').innerHTML = "Too Slow";
                 } else {
-                    let elapsedTime = stopTime - (Date.now() - 4000);
+                    let elapsedTime = stopTime - (Date.now() - (countdownStart * 1000));
                     document.getElementById('target').innerHTML = "Time was " + elapsedTime + "ms";
                 }
-            }, 4000);
+            }, countdownStart * 1000);
         }
 
         document.getElementById('startBtn').onclick = startTime;
