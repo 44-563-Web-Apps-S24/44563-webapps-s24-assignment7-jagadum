@@ -15,6 +15,7 @@
         <p id="score">Score is zero.</p>
         <button onclick="help()">Click for help.</button>
         <p id="help">Help report</p>
+        <!-- <button onclick="newgame()">New Game</button>  -->
             <div class="gamebox">
                 <img id="0" src="building.jpg" width="150px" height="150px" alt="building" onclick="check(0)">
             </div>
@@ -170,33 +171,37 @@
             }
     
             function help() {
-                if (gameOver) return;
-                
-                let row = Math.floor(lastLocation / 5);
-                let col = lastLocation % 5;
-                let helpText = "";
-    
-                // Check kinship locations
-                let kinshipLocations = [lastLocation - 1, lastLocation + 1, lastLocation - 5, lastLocation + 5];
-                for (let loc of kinshipLocations) {
-                    if (fancyCoinLocations.includes(loc)) {
-                        helpText = "So close";
-                        break;
-                    }
-                }
-    
-                // Check monster proximity
-                let monsterRow = Math.floor(monsterLocation / 5);
-                let monsterCol = monsterLocation % 5;
-                if (Math.abs(row - monsterRow) <= 1 && Math.abs(col - monsterCol) <= 1) {
-                    helpText = "Grrr";
-                } else {
-                    helpText = "All clear";
-                }
-    
-                document.getElementById("help").innerText = helpText;
+            let returnValue = "All Clear";
+            let row = Math.floor(lastLocation / 5);
+            let col = lastLocation % 5;
+            let kinshipLocations = [lastLocation - 1, lastLocation + 1, lastLocation - 5, lastLocation + 5];
+            
+            kinshipLocations.forEach(kinshipLocation => {
+                if (fancyCoinLocations.includes(kinshipLocation))
+                    returnValue = "So close";
+            });
+            if (Math.abs(row - Math.floor(monsterLocation / 5)) <= 1 && Math.abs(col - (monsterLocation % 5)) <= 1) {
+                returnValue = "Grrr";
             }
-        </script>
+            document.getElementById("help").innerHTML = returnValue;
+        }
+            //Bonus
+            function newgame(){
+                gameOver=false;
+                score = 0; 
+                locations = 0;
+                let imgrest = document.getElementsByTagName("img");
+                for (i=0; i < imgrest.length; i++){
+                    imgrest[i].src ="building.jpg";
+                }
+                monsterLocation = Math.floor(Math.random()*35);
+                for (i=0; i < fancyCoinLocations.length; i++){
+                    fancyCoinLocations[i]=Math.floor(Math.random()*35);
+                }
+                document.getElementById("score").innerText = "Score is " + score + ".";
+                document.getElementById("locations").innerText = "Number of locations checked is " + locations + ".";
+            }
+    </script>
 
         </body>
         </html>
