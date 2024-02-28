@@ -11,41 +11,43 @@
 </head>
 <body>
   <h1>Nuthan Jarugumalli Speed Check</h1>
-  <div id="timer">Your time</div>
+  <div id="target">your time</div>
   <div id="counter">Count</div>
-  <button onclick="startTime()">Start Timer</button>
-  <button onclick="recordTime()">Stop Timer</button>
-  <h2>Timeout - Red in 3 seconds</h2>
+  <button type="button" id="startBtn" onclick="startTime()">Start timer</button>
+  <button type="button" id="stopBtn" onclick="recordTime()">Stop timer</button>
+  
+ <script>
+        let stopTime = undefined;
+
+        function recordTime() {
+            stopTime = Date.now();
+            console.log(stopTime);
+        }
+
+        document.getElementById('stopBtn').onclick = recordTime;
+        function startTime() {
+            for (let i = 0; i < 5; i++) {
+                setTimeout(function() {
+                    document.getElementById('counter').innerHTML = i;
+                }, (4 - i) * 1000);
+            }
+            setTimeout(function() {
+                if (stopTime === undefined) {
+                    document.getElementById('target').innerHTML = "Too Slow";
+                } else {
+                    let elapsedTime = stopTime - (Date.now() - 4000);
+                    document.getElementById('target').innerHTML = "Time was " + elapsedTime + "ms";
+                }
+            }, 4000);
+        }
+
+        document.getElementById('startBtn').onclick = startTime;
+</script>
+<h2>Timeout - Red in 3 seconds</h2>
   <button type="button" class="btn btn-primary" onclick="buttonPress()">Click me to change the color.</button>
   <p id="colorChangeTarget">I will become red</p>
-  
-  <script> 
-  let stopTime;
 
-  function recordTime() {
-    stopTime = Date.now();
-    console.log(stopTime);
-  }
-
-  function startTime() {
-    var startTime = Date.now();
-    let randomv = Math.floor(Math.random() * 9) + 2;
-    for (let i = 0; i < randomv; i++) {
-      setTimeout(function () {
-        document.getElementById("counter").innerHTML = i;
-      }, (4 - i) * 1000);
-    }
-    setTimeout(function() {
-      if (typeof stopTime === "undefined") {
-        document.getElementById("timer").innerHTML = "Too Slow";
-      } else {
-        stopTime = Date.now();
-        let elapsedTime = stopTime - startTime;
-        document.getElementById("timer").innerHTML = "Time was " + elapsedTime;
-      }
-    }, 4000);
-  }
-
+  <script>
   function buttonPress() {
     setTimeout(function() {
       document.getElementById('colorChangeTarget').style.color = "red";
