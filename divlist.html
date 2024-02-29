@@ -49,19 +49,13 @@
         let val = document.getElementsByClassName("divlist").value;
 		var ele= document.getElementById("text1").value;
 		console.log(ele);
-		
 		element.innerHTML = ele;
 		element.style.color = "orange"
-
-		
 		let container = document.getElementById('target')
-
 		container.appendChild(element)
-		
-
 	}
-    function remove()
-    {
+
+    function remove(){
         const divListItems = document.getElementsByClassName("divlist");
 		const length=divListItems.length;
 		console.log(length);
