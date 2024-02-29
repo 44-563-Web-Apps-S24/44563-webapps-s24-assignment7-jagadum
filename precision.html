@@ -10,14 +10,17 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-  <h1>Nuthan Jarugumalli Speed Check</h1>
+
+    <h1>Nuthan Jarugumalli Speed Check</h1>
+  <h2>Timeout</h2>
   <div id="target">your time</div>
   <div id="counter">Count</div>
   <button type="button" id="startBtn" onclick="startTime()">Start timer</button>
   <button type="button" id="stopBtn" onclick="recordTime()">Stop timer</button>
-
+  
  <script>
         let stopTime = undefined;
+
         function recordTime() {
             stopTime = Date.now();
             console.log(stopTime);
@@ -41,6 +44,7 @@
         }
 
         document.getElementById('startBtn').onclick = startTime;
-</script>
+    </script>
+
 </body>
 </html>
